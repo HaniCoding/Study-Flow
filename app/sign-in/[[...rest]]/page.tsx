@@ -1,8 +1,12 @@
+import { auth } from '@clerk/nextjs/server';
 import { SignIn } from '@clerk/nextjs';
 import { Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const { userId } = await auth();
+  if (userId) redirect('/dashboard');
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-muted/30">
       <div className="w-full max-w-md space-y-8">
